@@ -45,14 +45,18 @@ This role installs and configures MySQL or MariaDB server on RHEL/CentOS servers
 
 ## Homologated
 
-| MYSQL   | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | Centos 8 | Amazonlinux 2 |
+### MySQL
+
+| Version | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | Centos 8 | Amazonlinux 2 |
 | ------- | ------------ | -------- | --------- | ------ | ------ | -------- | -------- | ------------- |
 | 5.5     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
 | 5.6     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
 | 5.7     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
 | 8.0     | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
 
-| MARIADB | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | Centos 8 | Amazonlinux 2 |
+### MariaDB
+
+| Version | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | Centos 8 | Amazonlinux 2 |
 | ------- | ------------ | -------- | --------- | ------ | ------ | -------- | -------- | ------------- |
 | 10.3    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
 | 10.4    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
