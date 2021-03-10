@@ -7,7 +7,6 @@ mysql_apt_template: mariadb.list
 mysql_default_packages:
   - mariadb-server
   - libmariadb3
-  - galera-4
   - mariadb-client
   - mariadb-common
 
@@ -16,6 +15,7 @@ mysql_default_python_packages:
   - dirmngr
   - software-properties-common
   - python3-dev
+  - python3-pip
   - libmariadb-dev
   - build-essential
 mysql_default_slow_query_log_file: /var/log/mysql-slow.log

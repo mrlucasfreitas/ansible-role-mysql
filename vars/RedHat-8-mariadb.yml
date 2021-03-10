@@ -11,7 +11,6 @@ mysql_default_packages:
   - MariaDB-server
   - MariaDB-shared
   - MariaDB-common
-  - galera-4
   - MariaDB-devel
 
 mysql_fingerprint: '1993 69E5 404B D5FC 7D2F E43B CBCB 082A 1BB9 43DB'

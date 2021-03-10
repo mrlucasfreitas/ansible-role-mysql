@@ -1,11 +1,11 @@
 ---
 mysql_default_daemon: mariadb
 mysql_default_version: 10.5
-mysql_default_repo: "http://yum.mariadb.org/\
-        {{ mysql_version }}/\
-        centos{{ ansible_distribution_major_version }}-amd64"
+mysql_default_repo: 'http://yum.mariadb.org/{{ mysql_version }}/rhel7-amd64'
 mysql_default_gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 mysql_default_repofile: '/etc/yum.repos.d/{{ mysql_daemon }}.repo'
+mysql_module_hotfixes: true
+
 mysql_default_packages:
   - MariaDB-client
   - MariaDB-server
@@ -15,15 +15,15 @@ mysql_default_packages:
 
 mysql_fingerprint: '1993 69E5 404B D5FC 7D2F E43B CBCB 082A 1BB9 43DB'
 mysql_default_python_packages:
-  - boost-program-options
   - gcc
   - lsof
   - rsync
   - tar
+  - python3
   - python3-devel
-  - python3-pip
-  - libselinux-python3
-  - python-setuptools
+  - python3-setuptools
+  - python3-wheel
+  - libselinux-python
 
 mysql_default_slow_query_log_file: /var/log/mysql-slow.log
 mysql_default_log_error: /var/log/mariadb.log

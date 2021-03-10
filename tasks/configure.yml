@@ -11,6 +11,9 @@
         executable: pip3
       register: pip_install
       until: pip_install is succeeded
+      environment:
+        PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
+        SOME: value
 
     - name: Install {{ mysql_daemon }} {{ mysql_version }}
       package:
@@ -29,10 +32,14 @@
       pip:
         name:
           - mysqlclient
+          - selinux
         state: present
         executable: pip3
       register: mysql_connector_install
       until: mysql_connector_install is succeeded
+      environment:
+        PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
+        SOME: value
 
     - name: Extract mysql version
       set_fact:

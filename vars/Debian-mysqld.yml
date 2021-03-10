@@ -8,6 +8,7 @@ mysql_default_python_packages:
   - '{{ python_executable }}-pip'
   - '{{ python_executable }}-apt'
   - python3-dev
+  - python3-pip
   - gnupg
   - default-libmysqlclient-dev
   - build-essential

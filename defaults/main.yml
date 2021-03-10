@@ -26,6 +26,9 @@ mysql_root_home: /root
 mysql_root_username: root
 mysql_root_password: root
 
+# Enable credential root in my.cnf
+mysql_root_mycnf_credential: true
+
 # Whether my.cnf should be updated on every run.
 overwrite_global_mycnf: true
 

@@ -1,4 +1,8 @@
-__pycache__
-*.pyc
-*.rst
+# Temp
+*.retry
+*~
+*.bak
+
+# Vagrant
+.vagrant/
 *.log

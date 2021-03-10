@@ -7,6 +7,13 @@
         description: EPEL YUM repo
         metalink: https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch&infra=$infra&content=$contentdir
         gpgcheck: false
+      when: ansible_distribution != "Amazon"
+
+    - name: (Amazon Linux) Enable EPEL
+      shell: "yum-config-manager --enable epel"
+      become: true
+      changed_when: false
+      when: ansible_distribution == "Amazon"
 
     - name: Set {{ mysql_daemon }} {{ mysql_version }} repository file
       template:

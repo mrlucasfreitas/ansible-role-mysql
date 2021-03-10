@@ -39,6 +39,7 @@
     - name: Check mysql version
       mysql_variables:
         variable: version
+        login_unix_socket: "{{ mysql_default_socket }}"
       register: mysql_version_out
       until: mysql_version_out is succeeded
       become: true
@@ -124,6 +125,15 @@
         login_unix_socket: '{{ mysql_socket }}'
       no_log: true
 
+    - name: Copy .my.cnf file with root password credentials.
+      template:
+        src: "root-my.cnf.j2"
+        dest: "{{ mysql_root_home }}/.my.cnf"
+        owner: root
+        group: root
+        mode: 0600
+      when: mysql_root_mycnf_credential
+
     - name: Remove anonymous MySQL users
       mysql_user:
         name: ''
@@ -131,6 +141,7 @@
         state: absent
         login_user: '{{ mysql_root_username }}'
         login_password: '{{ mysql_root_password }}'
+        login_unix_socket: "{{ mysql_default_socket }}"
 
     - name: Remove MySQL test database
       mysql_db:
@@ -138,4 +149,5 @@
         state: absent
         login_user: '{{ mysql_root_username }}'
         login_password: '{{ mysql_root_password }}'
+        login_unix_socket: "{{ mysql_default_socket }}"
   become: true

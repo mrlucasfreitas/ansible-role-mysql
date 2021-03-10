@@ -40,6 +40,24 @@ This role installs and configures MySQL or MariaDB server on RHEL/CentOS servers
       - Debian
           - 9
           - 10
+      - Amazonlinux
+          - 2
+
+## Homologated
+
+| MYSQL   | UBUNTU 18.04 | DEBIAN 9 | DEBIAN 10 | RHEL 7 | RHEL 8 | CENTOS 7 | CENTOS 8 | AMAZONLINUX 2 |
+| ------- | ------------ | -------- | --------- | ------ | ------ | -------- | -------- | ------------- |
+| 5.5     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
+| 5.6     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
+| 5.7     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
+| 8.0     | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
+
+| MARIADB | UBUNTU 18.04 | DEBIAN 9 | DEBIAN 10 | RHEL 7 | RHEL 8 | CENTOS 7 | CENTOS 8 | AMAZONLINUX 2 |
+| ------- | ------------ | -------- | --------- | ------ | ------ | -------- | -------- | ------------- |
+| 10.3    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
+| 10.4    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
+| 10.5    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
+
 
 ## Role Variables
 
