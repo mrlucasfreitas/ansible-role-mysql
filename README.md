@@ -20,10 +20,10 @@ This role installs and configures MySQL or MariaDB server on RHEL/CentOS/Ubuntu/
 ## Requirements
 
 To apply:
-  - Ansible >= 2.8.x
+  - Ansible >= 2.9.x
 
 To tests:
-  - Ansible >= 2.8.x
+  - Ansible >= 2.9.x
   - VirtualBox >= 6.1
   - Vagrant >= 2.2.6
   - vagrant-hostsupdater
@@ -307,6 +307,64 @@ Due to new breaking changes in MySQL 8.0 we included modified module `mysql_user
 
 ## Tests
 
+To test on vagrant:
+```sh
+# Show vms
+vagrant status
+```
+
+Edit `tests/test.yml` and adjust as needed:
+```sh
+---
+- name: Install Python on Ubuntu
+  hosts: ubuntu18
+  become: true
+  gather_facts: no
+
+  tasks:
+    - name: Install Python 2 on Ubuntu
+      raw: test -e /usr/bin/python || (apt install -y python-minimal)
+      changed_when: false
+  
+    - name: Install Python 3 on Ubuntu
+      raw: test -e /usr/bin/python3 || (apt install -y python3-minimal)
+      changed_when: false
+
+- hosts: ubuntu18 centos7 centos8 amazonlinux2
+  become: true
+  remote_user: vagrant
+  roles:
+    - ansible-role-mysql
+  vars:
+    # Define a what install mysqd (version 5.5/5.6/5.7/8.0) or mariabd (version 10.3/10.4/10.5)
+    mysql_daemon: mysqld
+    mysql_version: 8.0
+  ...
+```
+
+Run VM:
+```sh
+# Create example
+vagrant up amazonlinux2
+```
+
+Apply modifications from `tests/test.yml`
+```sh
+# Provision example
+vagrant provision amazonlinux2
+# or
+ansible-playbook tests/test.yml -i tests/inventory -l amazonlinux2 -u vagrant
+```
+
+After testing:
+```sh
+# Delete example
+vagrant destroy amazonlinux2
+```
+
+More information about vagrant [here](https://github.com/mrlucasfreitas/easy-vagrant).
+
+#
 __Note__: CentOS always do password reset via `rescue` section: It should be noted that the play continues if a rescue section completes successfully as it ‘erases’ the error status (but not the reporting), this means it will appear in the **playbook statistics** ONLY.
 
 **ATTENTION!** Note that override parameters in playbook have to be set as `role parameters` (see example above). Parameters set as usual hostvars or inventory parameters will not supercede default role parameters set by role scenario depending on OS version etc. 
