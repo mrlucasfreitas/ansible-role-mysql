@@ -231,13 +231,13 @@ Due to new breaking changes in MySQL 8.0 we included modified module `mysql_user
 
 ## Example Playbooks
 
-**ATTENTION!** Mysql role must be executed before any other because of package dependency:
+**ATTENTION!** Mysql role must be executed before any other because of package dependency.
 
 Example:
 ```sh
 ---
-  - name: Deploy Zabbix Server
-    hosts: zabbixserver
+  - name: Deploy MySQL Server
+    hosts: mysqlserver
 
     roles:
       # mysql role must be executed before any other because of package dependency
