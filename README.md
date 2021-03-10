@@ -1,8 +1,30 @@
-# Ansible Role: MySQL
+# Ansible Role MySQL
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/ansible-role-mysql/master/LICENSE)
 ![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F35413%2F&query=$.min_ansible_version)
 
 Version: 0.0.2
+
+Index
+=================
+<!--ts-->
+   * [Summary](##Summary)
+   * [Role tasks](##Role-tasks)
+   * [Requirements](##Requirements)
+   * [Support](##Support)
+   * [Homologated](##Homologated)
+      * [MySQL](###MySQL)
+      * [MariaDB](###MariaDB)
+   * [Requirements file](##Requirements-ile)
+   * [Variables](##Variables)
+   * [Dependencies](##Dependencies)
+   * [Example Playbooks](##Example-Playbooks)
+      * [Installing MySQL 5.5 / 5.6 / 5.7](###Installing-MySQL-5.5-/-5.6-/-5.7:)
+      * [Installing MySQL 8.0](###Installing-MySQL-8.0-version:)
+      * [Installing MariaDB 10.3 / 10.4 / 10.5](###Installing-MariaDB-10.3-/-10.4-/-10.5:)
+   * [Tests](##Tests)
+   * [License](##License)
+   * [Author Information](##Author-Information)
+<!--te-->
 
 ## Summary
 
