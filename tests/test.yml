@@ -1,19 +1,19 @@
 ---
-- name: Instalação do Python em Ubuntu
+- name: Install Python on Ubuntu
   hosts: ubuntu18
   become: true
   gather_facts: no
 
   tasks:
-    - name: Instala Python 2, se necessário no Ubuntu
+    - name: Install Python 2 on Ubuntu
       raw: test -e /usr/bin/python || (apt install -y python-minimal)
       changed_when: false
   
-    - name: Instala Python 3, se necessário no Ubuntu
+    - name: Install Python 3 on Ubuntu
       raw: test -e /usr/bin/python3 || (apt install -y python3-minimal)
       changed_when: false
 
-- hosts: ubuntu18 centos6 centos7 centos8 amazonlinux2
+- hosts: ubuntu18 centos7 centos8 amazonlinux2
   become: true
   remote_user: vagrant
   roles:
@@ -32,9 +32,9 @@
     # The default root user installed by mysql - almost always root
     mysql_root_home: /root
     mysql_root_username: root
-    mysql_root_password: MyP4s$.#
+    mysql_root_password: r00t.P4$$
 
-    # Enable credential root in my.cnf
+    # Enable .my.cnf credentials in / root
     mysql_root_mycnf_credential: true
 
     # Whether my.cnf should be updated on every run.
