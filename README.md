@@ -30,31 +30,6 @@ To tests:
 
 ## Support
 
-  - Supported versions:
-      - Oracle Mysql
-          - 5.5
-          - 5.6
-          - 5.7
-          - 8.0
-      - Mariadb
-          - 10.3
-          - 10.4
-          - 10.5
-      
-  - Supported OS:
-      - RHEL
-          - 7
-          - 8
-      - CentOS
-          - 7
-          - 8
-      - Ubuntu
-          - 18.04
-      - Debian
-          - 9
-          - 10
-      - Amazonlinux
-          - 2
 ### Supported versions:
 | Oracle Mysql | Mariadb |
 | ------------ | ------- |
@@ -72,7 +47,6 @@ To tests:
 ## Homologated
 
 ### MySQL
-
 | Version | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | CentOS 8 | Amazonlinux 2 |
 | ------- | ------------ | -------- | --------- | ------ | ------ | -------- | -------- | ------------- |
 | 5.5     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
@@ -81,7 +55,6 @@ To tests:
 | 8.0     | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
 
 ### MariaDB
-
 | Version | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | CentOS 8 | Amazonlinux 2 |
 | ------- | ------------ | -------- | --------- | ------ | ------ | -------- | -------- | ------------- |
 | 10.3    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
@@ -137,6 +110,10 @@ The home directory inside which Python MySQL settings will be stored, which Ansi
     mysql_root_home: /root
     mysql_root_username: root
     mysql_root_password: root
+
+Enable .my.cnf credentials in /root.
+
+    mysql_root_mycnf_credential: true
 
 The MySQL root user account details.
 
@@ -232,7 +209,7 @@ Due to new breaking changes in MySQL 8.0 we included modified module `mysql_user
 
 ## Example Playbooks
 
-### Installing MySQL 5.5 / 5.6 / 5.7 version:
+### Installing MySQL 5.5 / 5.6 / 5.7:
 ```yaml
 - hosts: ubuntu18 centos7 amazonlinux2
   become: true
