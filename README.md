@@ -55,12 +55,25 @@ To tests:
           - 10
       - Amazonlinux
           - 2
+### Supported versions:
+| Oracle Mysql | Mariadb |
+| ------------ | ------- |
+| 5.5          | -       |
+| 5.6          | 10.3    |
+| 5.7          | 10.4    |
+| 8.0          | 10.5    |
+
+### Supported OS:
+| Ubuntu | Debian | RHEL | CentOS | Amazonlinux |
+| ------ | ------ | ---- | ------ | ----------- |
+| 18.04  | 9      | 7    | 7      | -           |
+| -      | 10     | 8    | 8      | 2           |
 
 ## Homologated
 
 ### MySQL
 
-| Version | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | Centos 8 | Amazonlinux 2 |
+| Version | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | CentOS 8 | Amazonlinux 2 |
 | ------- | ------------ | -------- | --------- | ------ | ------ | -------- | -------- | ------------- |
 | 5.5     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
 | 5.6     | ✔️            | ✔️        | ❌        | ✔️      | ❌     | ✔️        | ❌       | ✔️             |
@@ -69,7 +82,7 @@ To tests:
 
 ### MariaDB
 
-| Version | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | Centos 8 | Amazonlinux 2 |
+| Version | Ubuntu 18.04 | Debian 9 | Debian 10 | Rhel 7 | Rhel 8 | Centos 7 | CentOS 8 | Amazonlinux 2 |
 | ------- | ------------ | -------- | --------- | ------ | ------ | -------- | -------- | ------------- |
 | 10.3    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
 | 10.4    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
@@ -219,50 +232,103 @@ Due to new breaking changes in MySQL 8.0 we included modified module `mysql_user
 
 ## Example Playbooks
 
-### Installing MySQL 5.5/5.6/5.7/8.0 version:
+### Installing MySQL 5.5 / 5.6 / 5.7 version:
 ```yaml
-- hosts: db-servers
+- hosts: ubuntu18 centos7 amazonlinux2
+  become: true
+  remote_user: vagrant
   roles:
-    - role: lean_delivery.mysql
+    - ansible-role-mysql
   vars:
-    mysql_root_password: 88TEM-veDRE<888serd
+  
+    mysql_daemon: mysqld
+    mysql_version: 5.7
+    
+    mysql_root_username: root
+    mysql_root_password: r00t.P4$$
+    mysql_root_mycnf_credential: true
+  
+    mysql_port: "3306"
+    mysql_bind_address: "0.0.0.0"
+    mysql_skip_name_resolve: false
+
     mysql_databases:
-      - name: example2_db
+      - name: example_db
         encoding: latin1
         collation: latin1_general_ci
+    
     mysql_users:
-      - name: example2_user
+      - name: example_user
         host: "%"
-        password: Sime32-SRRR-password
-        priv: "example2_db.*:ALL"
-    mysql_port: 3306
-    mysql_bind_address: '0.0.0.0'
-    mysql_daemon: mysqld
-    mysql_version: 8.0
-    mysql_packages:
-      - mysql-server
+        password: ex4mpl3_Pa$$
+        priv: "example_db.*:ALL"
 ``` 
 
-### Installing MariaDB 10.3/10.4/10.5:
+### Installing MySQL 8.0 version:
 ```yaml
-- hosts: db-servers
+- hosts: ubuntu18 centos7 centos8 amazonlinux2
+  become: true
+  remote_user: vagrant
   roles:
-    - role: lean_delivery.mysql
+    - ansible-role-mysql
   vars:
-    mysql_root_password: 88TEM-veDRE<888serd
+  
+    mysql_daemon: mysqld
+    mysql_version: 8.0
+    
+    mysql_root_username: root
+    mysql_root_password: r00t.P4$$
+    mysql_root_mycnf_credential: true
+  
+    mysql_port: "3306"
+    mysql_bind_address: "0.0.0.0"
+    mysql_skip_name_resolve: false
+
     mysql_databases:
-      - name: example2_db
+      - name: example_db
         encoding: latin1
         collation: latin1_general_ci
+    
     mysql_users:
-      - name: example2_user
+      - name: example_user
         host: "%"
-        password: Sime32-SRRR-password
-        priv: "example2_db.*:ALL"
-    mysql_port: 3306
-    mysql_bind_address: '0.0.0.0'
-    mysql_daemon: mariadb
+        password: ex4mpl3_Pa$$
+        priv: "example_db.*:ALL"
 ``` 
+
+### Installing MariaDB 10.3 / 10.4 / 10.5:
+```yaml
+- hosts: ubuntu18 centos7 centos8 amazonlinux2
+  become: true
+  remote_user: vagrant
+  roles:
+    - ansible-role-mysql
+  vars:
+  
+    mysql_daemon: mariadb
+    mysql_version: 10.5
+    
+    mysql_root_username: root
+    mysql_root_password: r00t.P4$$
+    mysql_root_mycnf_credential: true
+  
+    mysql_port: "3306"
+    mysql_bind_address: "0.0.0.0"
+    mysql_skip_name_resolve: false
+
+    mysql_databases:
+      - name: example_db
+        encoding: latin1
+        collation: latin1_general_ci
+    
+    mysql_users:
+      - name: example_user
+        host: "%"
+        password: ex4mpl3_Pa$$
+        priv: "example_db.*:ALL"
+``` 
+
+## Tests
 
 __Note__: CentOS always do password reset via `rescue` section: It should be noted that the play continues if a rescue section completes successfully as it ‘erases’ the error status (but not the reporting), this means it will appear in the **playbook statistics** ONLY.
 
