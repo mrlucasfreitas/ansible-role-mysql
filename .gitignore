@@ -6,3 +6,8 @@
 # Vagrant
 .vagrant/
 *.log
+
+# Others
+__pycache__
+*.pyc
+*.rst
