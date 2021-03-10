@@ -2,17 +2,33 @@
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/ansible-role-mysql/master/LICENSE)
 ![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F35413%2F&query=$.min_ansible_version)
 
+Version: 0.0.2
+
 ## Summary
 
-This role installs and configures MySQL or MariaDB server on RHEL/CentOS servers.
+### Simple, practical and easy to use
+
+This role installs and configures MySQL or MariaDB server on RHEL/CentOS/Ubuntu/Amazonlinux servers.
 
 ## Role tasks
 
   - Installs MySQL/MariaDB
   - Reset root password for mysql
   - Create db and users
+  - Create .my.cnf in root
 
 ## Requirements
+
+To apply:
+  - Ansible >= 2.8.x
+
+To tests:
+  - Ansible >= 2.8.x
+  - VirtualBox >= 6.1
+  - Vagrant >= 2.2.6
+  - vagrant-hostsupdater
+
+## Support
 
   - Supported versions:
       - Oracle Mysql
@@ -24,6 +40,7 @@ This role installs and configures MySQL or MariaDB server on RHEL/CentOS servers
           - 10.3
           - 10.4
           - 10.5
+      
   - Supported OS:
       - RHEL
           - 7
@@ -58,8 +75,18 @@ This role installs and configures MySQL or MariaDB server on RHEL/CentOS servers
 | 10.4    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
 | 10.5    | ✔️            | ✔️        | ✔️         | ✔️      | ✔️      | ✔️        | ✔️        | ✔️             |
 
+## Requirements file
 
-## Role Variables
+Requirements file example (`requirements.yml`):
+
+```sh
+- src: git@github.com:mrlucasfreitas/ansible-role-mysql.git
+  scm: git
+  version: "v0.0.2"
+  name: mysql
+```
+
+## Variables
 
 Available variables are listed below, along with default values:
 
@@ -171,7 +198,7 @@ Replication settings. Set `mysql_server_id` and `mysql_replication_role` by serv
 
 `mysql_replication_master` needs to resolve to an IP or a hostname which is accessable to the Slaves (this could be a `/etc/hosts` injection or some other means), otherwise the slaves cannot communicate to the master.
 
-## additional_parameters
+### additional_parameters
 Also you can set other parametrs, which are not listed here and it will be written to the configuration file `my.cnf`. 
 
 Example:
@@ -192,29 +219,7 @@ Due to new breaking changes in MySQL 8.0 we included modified module `mysql_user
 
 ## Example Playbooks
 
-### Installing MySQL 5.7 version:
-```yaml
-- hosts: db-servers
-  roles:
-    - role: lean_delivery.mysql
-  vars:
-    mysql_root_password: Super_P@s$0rd
-    mysql_databases:
-      - name: example2_db
-        encoding: latin1
-        collation: latin1_general_ci
-    mysql_users:
-      - name: example2_user
-        host: "%"
-        password: Sime32_U$er_p@ssw0rd
-        priv: "example2_db.*:ALL"
-    mysql_port: 3306
-    mysql_bind_address: '0.0.0.0'
-    mysql_daemon: mysqld
-    mysql_version: 5.7
-``` 
-
-### Installing MySQL 8.0 version:
+### Installing MySQL 5.5/5.6/5.7/8.0 version:
 ```yaml
 - hosts: db-servers
   roles:
@@ -238,7 +243,7 @@ Due to new breaking changes in MySQL 8.0 we included modified module `mysql_user
       - mysql-server
 ``` 
 
-### Installing MariaDB:
+### Installing MariaDB 10.3/10.4/10.5:
 ```yaml
 - hosts: db-servers
   roles:
@@ -259,7 +264,6 @@ Due to new breaking changes in MySQL 8.0 we included modified module `mysql_user
     mysql_daemon: mariadb
 ``` 
 
-
 __Note__: CentOS always do password reset via `rescue` section: It should be noted that the play continues if a rescue section completes successfully as it ‘erases’ the error status (but not the reporting), this means it will appear in the **playbook statistics** ONLY.
 
 **ATTENTION!** Note that override parameters in playbook have to be set as `role parameters` (see example above). Parameters set as usual hostvars or inventory parameters will not supercede default role parameters set by role scenario depending on OS version etc. 
@@ -267,8 +271,10 @@ __Note__: CentOS always do password reset via `rescue` section: It should be not
 ## License
 Apache
 
-
 ## Author Information
-authors:
-
+Authors:
   - Lean Delivery Team team@lean-delivery.com
+  - Lucas Freitas (mrlucasfreitas)
+
+Revised, modified and approved:
+  - Lucas Freitas (mrlucasfreitas)
