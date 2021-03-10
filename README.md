@@ -231,6 +231,24 @@ Due to new breaking changes in MySQL 8.0 we included modified module `mysql_user
 
 ## Example Playbooks
 
+**ATTENTION!** Mysql role must be executed before any other because of package dependency:
+
+Example:
+```sh
+---
+  - name: Deploy Zabbix Server
+    hosts: zabbixserver
+
+    roles:
+      # mysql role must be executed before any other because of package dependency
+      - role: mysql
+        tags: mysql
+      - role: nginx
+        tags: nginx
+      - role: php
+        tags: php
+```
+
 ### Installing MySQL 5.5 / 5.6 / 5.7:
 ```yaml
 - hosts: ubuntu18 centos7 amazonlinux2
