@@ -100,6 +100,9 @@ mysql_innodb_file_format: barracuda
 # mysqldump settings.
 mysql_mysqldump_max_allowed_packet: 64M
 
+# When innodb_strict_mode is enabled, InnoDB returns errors rather than warnings for certain conditions.
+mysql_innodb_strict_mode: 0
+
 # Logging settings.
 mysql_log: "/var/log/{{ mysql_daemon }}.log"
 # The following variables have a default value depending on operating system. The default
